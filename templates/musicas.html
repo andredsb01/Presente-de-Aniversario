@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Musicas</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='musicas.css') }}">
+</head>
+<body>
+    <div class="upload">
+        
+    </div>
+    
+    <div class="principal">
+        <p>Musicas: {{Nmusicas}}
+        <audio id="tocar" controls></audio>
+        <a href="upload">upload</a>
+        </p>
+        <div id="musicas">
+            {% for autor, nome, musica in arquivos %}
+                <div class="musica" onclick="tocarMusica('{{musica}}')">
+                    <h1>
+                        {{autor}}
+                    </h1>
+                    <p1>
+                        <ul>
+                            <li>{{nome}}</li>
+                        </ul>
+                        <a href="musicas/{{musica}}">Download</a>
+                    </p1>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+    <script>
+        function tocarMusica(nomeArquivo) {
+            const player = document.getElementById('tocar');
+            
+            player.src = `musicas/${nomeArquivo}`;
+            status.innerText = `Tocando: ${nomeArquivo}`;
+            player.play();
+        }
+    </script>
+</body>
+</html>
